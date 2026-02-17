@@ -1,16 +1,22 @@
 #!/bin/bash
-echo "--- Setting up Environment ---"
+
+echo "--- Workshop Setup Start ---"
+
+# 1. Zorg dat alles up to date is
 sudo dnf update -y
-sudo dnf install -y docker git python3-pip
+
+# 2. Installeer Docker en de Compose Plugin (voor Amazon Linux 2023)
+sudo dnf install -y docker docker-compose-plugin
+
+# 3. Start Docker service
 sudo service docker start
+
+# 4. Voeg de huidige user (ec2-user) toe aan de docker group
+# Dit voorkomt dat je 'sudo' voor elk docker commando moet zetten
 sudo usermod -a -G docker ec2-user
-pip3 install -r requirements.txt
 
-# Aliases toevoegen voor 'binary feel'
-echo "" >> ~/.bashrc
-echo "alias k-topics='docker compose exec kafka kafka-topics --bootstrap-server kafka:9092'" >> ~/.bashrc
-echo "alias k-console-producer='docker compose exec kafka kafka-console-producer --bootstrap-server kafka:9092'" >> ~/.bashrc
-echo "alias k-console-consumer='docker compose exec kafka kafka-console-consumer --bootstrap-server kafka:9092'" >> ~/.bashrc
-echo "alias dc='docker compose'" >> ~/.bashrc
-
-echo "--- Setup Complete! Close this terminal and open a new one. ---"
+echo "--------------------------------------------------------"
+echo "INSTALLATIE VOLTOOID!"
+echo "--------------------------------------------------------"
+echo "BELANGRIJK: Sluit deze terminal nu en open een nieuwe."
+echo "(Dit is nodig om de nieuwe groepsrechten te activeren)"
