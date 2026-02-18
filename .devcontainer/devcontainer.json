@@ -1,17 +1,19 @@
 {
   "name": "Kafka Workshop",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    // We voegen expliciet docker-outside-of-docker toe om zeker te zijn van permissies,
+    // hoewel de universal image dit vaak al heeft. Dit is de veiligste methode.
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-azuretools.vscode-docker",
-        "humao.rest-client"
+        "donjayamanne.python-extension-pack"
       ]
     }
   },
-  "postCreateCommand": "pip install kafka-python && docker compose up -d",
-  "forwardPorts": [8080, 9092]
+  "forwardPorts": [8080, 9092],
+  "postCreateCommand": "pip install kafka-python && docker compose up -d"
 }
