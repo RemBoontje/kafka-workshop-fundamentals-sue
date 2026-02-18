@@ -2,9 +2,7 @@
   "name": "Kafka Workshop",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
-    // We voegen expliciet docker-outside-of-docker toe om zeker te zijn van permissies,
-    // hoewel de universal image dit vaak al heeft. Dit is de veiligste methode.
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    // We laten dit LEEG. De Universal image heeft Docker en Python al.
   },
   "customizations": {
     "vscode": {
